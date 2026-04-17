@@ -15,11 +15,21 @@
     nav a:hover, nav a.active { color: white; border-bottom-color: #e63946; }
     .container { max-width: 1200px; margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: 1fr 300px; gap: 2rem; }
     .ad-slot { background: #ddd; border: 2px dashed #aaa; border-radius: 8px; padding: 1rem; text-align: center; color: #888; font-size: 0.85rem; margin-bottom: 1.5rem; }
-    .section-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid #e63946; display: inline-block; }
+    .section-title { font-size: 1.25rem; font-weight: 700; margin: 1.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 3px solid #e63946; display: inline-block; }
+    .section-title.tech { border-bottom-color: #457b9d; }
+    .section-title.sports { border-bottom-color: #2a9d8f; }
+    .section-title.culture { border-bottom-color: #e9c46a; }
+    .section-title.viral { border-bottom-color: #f4a261; }
+    .section-title.music { border-bottom-color: #9b5de5; }
     .featured { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 2rem; }
     .featured-img { width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; font-size: 5rem; background: linear-gradient(135deg, #1d3557, #457b9d); }
     .featured-content { padding: 1.5rem; }
     .tag { background: #e63946; color: white; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
+    .tag.tech { background: #457b9d; }
+    .tag.sports { background: #2a9d8f; }
+    .tag.culture { background: #e9c46a; color: #1a1a2e; }
+    .tag.viral { background: #f4a261; color: #1a1a2e; }
+    .tag.music { background: #9b5de5; }
     .featured-content h2 { font-size: 1.75rem; margin: 0.75rem 0; line-height: 1.2; }
     .featured-content p { color: #666; line-height: 1.6; }
     .featured-content a { text-decoration: none; color: inherit; }
@@ -41,10 +51,13 @@
     .trending-item .text { font-size: 0.9rem; line-height: 1.4; }
     footer { background: #1a1a2e; color: #888; text-align: center; padding: 2rem; margin-top: 2rem; font-size: 0.85rem; }
     footer span { color: #e63946; }
+    .updated-banner { background: linear-gradient(135deg, #2a9d8f, #1d3557); color: white; text-align: center; padding: 0.75rem; font-size: 0.9rem; }
+    .updated-banner span { opacity: 0.8; }
     @media (max-width: 768px) { .container { grid-template-columns: 1fr; } .articles-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+  <div class="updated-banner">Last updated: <span id="update-date"></span> by Puckwudgie 🐸</div>
   <header><h1>PulsePoint <span>Daily Trends</span></h1></header>
   <nav>
     <a href="index.html" class="active">Home</a>
@@ -59,35 +72,72 @@
   <div class="container">
     <main>
       <div class="ad-slot">📢 Ad Space — Google AdSense</div>
+
+      <!-- Featured Article -->
       <div class="featured">
         <a href="article-datacenters.html"><div class="featured-img">🏢</div></a>
         <div class="featured-content">
-          <span class="tag">Tech Policy</span>
+          <span class="tag">Featured</span>
           <a href="article-datacenters.html"><h2>Data Centers Face Mandatory Energy Surveys — Here's Why It Matters</h2></a>
           <p>The US government is cracking down on data center energy use. Here's what the new rules mean for AI, tech companies, and your internet.</p>
           <a href="article-datacenters.html" class="read-more">Read more →</a>
-          <p class="meta">April 15, 2026 · 4 min read</p>
+          <p class="meta">April 16, 2026 · 4 min read</p>
         </div>
       </div>
-      <h3 class="section-title">Today's Top Stories</h3>
+
+      <!-- Tech Section -->
+      <h3 class="section-title tech">🔌 Tech</h3>
       <div class="articles-grid">
         <div class="article-card">
-          <div class="card-img">🚗</div>
+          <div class="card-img" style="background: linear-gradient(135deg, #457b9d, #1d3557);">🚗</div>
           <div class="content"><a href="article-waymo.html"><h3>Waymo Now Open to Everyone in Orlando and Miami</h3></a><p class="meta">Tech · 3 min read</p></div>
         </div>
         <div class="article-card">
-          <div class="card-img">🎸</div>
+          <div class="card-img" style="background: linear-gradient(135deg, #457b9d, #1d3557);">📡</div>
+          <div class="content"><a href="article-flipper.html"><h3>Flipper Zero Can Rickroll Electronic Price Tags</h3></a><p class="meta">Tech · 4 min read</p></div>
+        </div>
+      </div>
+
+      <!-- Sports Section -->
+      <h3 class="section-title sports">🏃 Sports</h3>
+      <div class="articles-grid">
+        <div class="article-card">
+          <div class="card-img" style="background: linear-gradient(135deg, #2a9d8f, #264653);">👟</div>
+          <div class="content"><a href="article-track.html"><h3>Spring Track Season Is Here — Athletes to Watch This Year</h3></a><p class="meta">Sports · 4 min read</p></div>
+        </div>
+      </div>
+
+      <!-- Culture Section -->
+      <h3 class="section-title culture">🎮 Culture</h3>
+      <div class="articles-grid">
+        <div class="article-card">
+          <div class="card-img" style="background: linear-gradient(135deg, #e9c46a, #f4a261);">🎸</div>
           <div class="content"><a href="article-fortnite.html"><h3>Fortnite's Festival Mode Now Supports Microphones and Drums</h3></a><p class="meta">Culture · 3 min read</p></div>
         </div>
         <div class="article-card">
-          <div class="card-img">📡</div>
-          <div class="content"><a href="article-flipper.html"><h3>Flipper Zero Can Rickroll Electronic Price Tags</h3></a><p class="meta">Tech · 4 min read</p></div>
-        </div>
-        <div class="article-card">
-          <div class="card-img">📱</div>
-          <div class="content"><a href="article-ipad.html"><h3>iPad Air Rumored to Get OLED Display in 2027</h3></a><p class="meta">Tech · 2 min read</p></div>
+          <div class="card-img" style="background: linear-gradient(135deg, #e9c46a, #f4a261);">👟</div>
+          <div class="content"><a href="article-sneaker.html"><h3>New Sneaker Drop Everyone Is Waiting For This Spring</h3></a><p class="meta">Culture · 2 min read</p></div>
         </div>
       </div>
+
+      <!-- Viral Section -->
+      <h3 class="section-title viral">🔥 Viral</h3>
+      <div class="articles-grid">
+        <div class="article-card">
+          <div class="card-img" style="background: linear-gradient(135deg, #f4a261, #e76f51);">📱</div>
+          <div class="content"><a href="article-tiktok.html"><h3>Why This TikTok Trend Is Making Everyone Laugh</h3></a><p class="meta">Viral · 3 min read</p></div>
+        </div>
+      </div>
+
+      <!-- Music Section -->
+      <h3 class="section-title music">🎵 Music</h3>
+      <div class="articles-grid">
+        <div class="article-card">
+          <div class="card-img" style="background: linear-gradient(135deg, #9b5de5, #7b2cbf);">🎻</div>
+          <div class="content"><a href="article-laufey.html"><h3>Laufey's New Album Is Breaking Streaming Records</h3></a><p class="meta">Music · 3 min read</p></div>
+        </div>
+      </div>
+
     </main>
     <aside class="sidebar">
       <div class="ad-slot">📢 Ad Space</div>
@@ -102,6 +152,9 @@
       <div class="ad-slot" style="margin-top: 1rem;">📢 Ad Space</div>
     </aside>
   </div>
-  <footer><p>PulsePoint Daily © 2026 — Updated by Puckwudgie <span>🐸</span></p></footer>
+  <footer><p>PulsePoint Daily © 2026 — Updated daily by Puckwudgie <span>🐸</span></p></footer>
+  <script>
+    document.getElementById('update-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  </script>
 </body>
 </html>
