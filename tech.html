@@ -20,7 +20,7 @@
     .article-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: transform 0.2s; }
     .article-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
     .article-card a { text-decoration: none; color: inherit; }
-    .article-card .card-img { width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; background: linear-gradient(135deg, #457b9d, #1d3557); }
+    .article-card .card-img { width: 100%; height: 140px; object-fit: cover; }
     .article-card .content { padding: 1rem; }
     .article-card h3 { font-size: 1rem; margin-bottom: 0.5rem; line-height: 1.3; }
     .article-card .meta { color: #888; font-size: 0.8rem; }
@@ -54,37 +54,37 @@
       <div class="articles-grid">
         <div class="article-card">
           <a href="article-datacenters.html">
-            <div class="card-img">🏢</div>
+            <img src="https://picsum.photos/seed/datacenter3/400/200" alt="Data center" class="card-img">
             <div class="content"><h3>Data Centers Face Mandatory Energy Surveys</h3><p class="meta">Tech · 4 min read</p></div>
           </a>
         </div>
         <div class="article-card">
           <a href="article-flipper.html">
-            <div class="card-img">📡</div>
+            <img src="https://picsum.photos/seed/flipper-hack/400/200" alt="Flipper Zero" class="card-img">
             <div class="content"><h3>Flipper Zero Can Rickroll Electronic Price Tags</h3><p class="meta">Tech · 4 min read</p></div>
           </a>
         </div>
         <div class="article-card">
           <a href="article-ipad.html">
-            <div class="card-img">📱</div>
+            <img src="https://picsum.photos/seed/ipad2027/400/200" alt="iPad" class="card-img">
             <div class="content"><h3>iPad Air Rumored to Get OLED Display in 2027</h3><p class="meta">Tech · 2 min read</p></div>
           </a>
         </div>
         <div class="article-card">
           <a href="article-waymo.html">
-            <div class="card-img">🚗</div>
+            <img src="https://picsum.photos/seed/waymo-car/400/200" alt="Waymo car" class="card-img">
             <div class="content"><h3>Waymo Now Open to Everyone in Orlando and Miami</h3><p class="meta">Tech · 3 min read</p></div>
           </a>
         </div>
         <div class="article-card">
           <a href="article-coding.html">
-            <div class="card-img">💻</div>
+            <img src="https://picsum.photos/seed/code-startup/400/200" alt="Coding" class="card-img">
             <div class="content"><h3>New Coding Language That Startups Are Betting On</h3><p class="meta">Tech · 5 min read</p></div>
           </a>
         </div>
         <div class="article-card">
           <a href="article-ai-tool.html">
-            <div class="card-img">🤖</div>
+            <img src="https://picsum.photos/seed/ai-coding-dev/400/200" alt="AI coding" class="card-img">
             <div class="content"><h3>This AI Tool Is Changing How Developers Write Code</h3><p class="meta">Tech · 4 min read</p></div>
           </a>
         </div>
@@ -97,8 +97,6 @@
         <div class="trending-item"><span class="number">1</span><span class="text">Data center energy surveys mandatory</span></div>
         <div class="trending-item"><span class="number">2</span><span class="text">Flipper Zero price tag hack goes viral</span></div>
         <div class="trending-item"><span class="number">3</span><span class="text">iPad Air OLED rumor resurfaces</span></div>
-        <div class="trending-item"><span class="number">4</span><span class="text">Waymo opens to all in Orlando and Miami</span></div>
-        <div class="trending-item"><span class="number">5</span><span class="text">New startup coding language gains traction</span></div>
       </div>
       <div class="ad-slot" style="margin-top: 1rem;">📢 Ad Space</div>
     </aside>
