@@ -20,7 +20,7 @@
     .article-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); transition: transform 0.2s; }
     .article-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
     .article-card a { text-decoration: none; color: inherit; }
-    .article-card .card-img { width: 100%; height: 140px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; background: linear-gradient(135deg, #e9c46a, #f4a261); }
+    .article-card .card-img { width: 100%; height: 140px; object-fit: cover; }
     .article-card .content { padding: 1rem; }
     .article-card h3 { font-size: 1rem; margin-bottom: 0.5rem; line-height: 1.3; }
     .article-card .meta { color: #888; font-size: 0.8rem; }
@@ -56,6 +56,12 @@
       <h3 class="section-title">🎮 Culture</h3>
       <div class="articles-grid">
         <div class="article-card">
+          <a href="article-gta-vi.html">
+            <img src="https://picsum.photos/seed/gta-vi-release-2026/400/200" alt="GTA VI" class="card-img">
+            <div class="content"><h3>GTA VI Finally Has a Release Window — And It's Soon</h3><p class="meta">Culture · 4 min read</p></div>
+          </a>
+        </div>
+        <div class="article-card">
           <a href="article-minecraft-movie.html">
             <img src="https://picsum.photos/seed/minecraft-movie/400/200" alt="Minecraft movie" class="card-img">
             <div class="content"><h3>The Minecraft Movie Is Actually Good? Here's the Deal</h3><p class="meta">Culture · 4 min read</p></div>
@@ -79,8 +85,9 @@
       <div class="ad-slot">📢 Ad Space</div>
       <div class="trending-list">
         <h3>🔥 Trending Now</h3>
-        <div class="trending-item"><span class="number">1</span><span class="text">Minecraft movie actually reviewed well</span></div>
-        <div class="trending-item"><span class="number">2</span><span class="text">Fortnite adds real mic and drum support</span></div>
+        <div class="trending-item"><span class="number">1</span><span class="text">GTA VI confirmed for Fall 2026 release</span></div>
+        <div class="trending-item"><span class="number">2</span><span class="text">Minecraft movie actually reviewed well</span></div>
+        <div class="trending-item"><span class="number">3</span><span class="text">Fortnite adds real mic and drum support</span></div>
       </div>
       <div class="ad-slot" style="margin-top: 1rem;">📢 Ad Space</div>
     </aside>
