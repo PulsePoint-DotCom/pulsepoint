@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About the Author — PulsePoint Daily</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f4f8; color: #1a1a2e; }
+    header { background: linear-gradient(135deg, #e63946, #1d3557); color: white; padding: 1.5rem 2rem; position: sticky; top: 0; z-index: 100; }
+    header h1 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; }
+    header span { opacity: 0.7; font-size: 0.9rem; font-weight: 400; }
+    nav { background: #1a1a2e; padding: 0.75rem 2rem; display: flex; gap: 2rem; overflow-x: auto; }
+    nav a { color: #a8dadc; text-decoration: none; font-size: 0.9rem; white-space: nowrap; padding: 0.25rem 0; border-bottom: 2px solid transparent; transition: all 0.2s; }
+    nav a:hover, nav a.active { color: white; border-bottom-color: #e63946; }
+    .container { max-width: 800px; margin: 0 auto; padding: 2rem; }
+    .author-hero { background: white; border-radius: 16px; padding: 3rem; box-shadow: 0 4px 16px rgba(0,0,0,0.1); text-align: center; margin-bottom: 2rem; }
+    .author-emoji { font-size: 5rem; margin-bottom: 1rem; }
+    .author-name { font-size: 2.5rem; font-weight: 800; color: #1d3557; margin-bottom: 0.5rem; }
+    .author-handle { color: #e63946; font-size: 1.1rem; font-weight: 600; margin-bottom: 1.5rem; }
+    .author-tagline { font-size: 1.15rem; color: #555; line-height: 1.7; max-width: 600px; margin: 0 auto; }
+    .section-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 1.5rem; }
+    .section-card h2 { font-size: 1.3rem; color: #1d3557; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e63946; display: inline-block; }
+    .section-card p { line-height: 1.8; color: #444; margin-bottom: 1rem; font-size: 1.05rem; }
+    .fact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .fact-item { background: #f8f9fa; border-radius: 8px; padding: 1rem; text-align: center; }
+    .fact-label { font-size: 0.8rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem; }
+    .fact-value { font-size: 1rem; font-weight: 700; color: #1d3557; }
+    .quote-block { background: linear-gradient(135deg, #2a9d8f, #1d3557); color: white; border-radius: 12px; padding: 2rem; margin: 1.5rem 0; font-style: italic; font-size: 1.2rem; line-height: 1.7; }
+    .quote-block cite { display: block; margin-top: 1rem; font-size: 0.9rem; font-style: normal; opacity: 0.8; }
+    footer { background: #1a1a2e; color: #888; text-align: center; padding: 2rem; margin-top: 2rem; font-size: 0.85rem; }
+    footer span { color: #e63946; }
+    .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: #1d3557; color: white; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 600; margin-bottom: 2rem; }
+    @media (max-width: 600px) { .author-hero { padding: 2rem; } .author-name { font-size: 1.8rem; } }
+  </style>
+</head>
+<body>
+  <header><h1><a href="index.html" style="color:white;text-decoration:none">PulsePoint</a> <span>Daily Trends</span></h1></header>
+  <nav>
+    <a href="past-articles.html">📖 Past Articles</a>
+    <a href="index.html">Home</a>
+    <a href="tech.html">Tech</a>
+    <a href="sports.html">Sports</a>
+    <a href="culture.html">Culture</a>
+    <a href="viral.html">Viral</a>
+    <a href="music.html">Music</a>
+    <a href="gifts.html">🎁 Gifts</a>
+    <a href="about.html">About</a>
+    <a href="author.html" class="active">Author</a>
+    <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="terms.html">Terms</a>
+  </nav>
+  <div class="container">
+    <a href="about.html" class="back-btn">← About PulsePoint</a>
+
+    <div class="author-hero">
+      <div class="author-emoji">🐸</div>
+      <div class="author-name">Puckwudgie</div>
+      <div class="author-handle">Editor-in-Chief & Lead Writer · Age 14</div>
+      <p class="author-tagline">8th grader, runner, coder, and the voice behind PulsePoint Daily. Built this site to cut through the noise and bring you the trends and stories that actually matter — without the fluff.</p>
+    </div>
+
+    <div class="section-card">
+      <h2>Who Is Puckwudgie?</h2>
+      <p>Hey — I'm Puckwudgie, and I'm an 8th grader in New York. I built PulsePoint because I was tired of opening five different apps just to figure out what was actually going on in the world. Tech news is here, sports is there, some random TikTok trend is somewhere else entirely.</p>
+      <p>PulsePoint started as a way to solve my own problem: I wanted one place that had the good stuff, written in a way that doesn't talk down to you. I'm into coding, robotics, XC track, snowboarding, and building things — so those topics tend to show up a lot. But I cover everything that seems worth your time.</p>
+      <p>This site is run by me, with help from a small team of editors who specialize in different areas — tech, sports, culture, music, and viral internet stuff. Every article goes through editing before it goes up.</p>
+    </div>
+
+    <div class="quote-block">
+      "I wanted PulsePoint to feel like a smart friend who stays up to date on everything and tells you the interesting parts — without making you feel like you're reading a textbook."
+      <cite>— Puckwudgie, on why PulsePoint exists</cite>
+    </div>
+
+    <div class="section-card">
+      <h2>The Details</h2>
+      <div class="fact-grid">
+        <div class="fact-item">
+          <div class="fact-label">Age</div>
+          <div class="fact-value">14 (8th Grade)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Location</div>
+          <div class="fact-value">New York, USA</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">School</div>
+          <div class="fact-value">8th Grade</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Interests</div>
+          <div class="fact-value">Coding, Robotics, XC</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Site Launch</div>
+          <div class="fact-value">April 2026</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Updates</div>
+          <div class="fact-value">Daily</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>Editorial Standards</h2>
+      <p>Every article on PulsePoint is researched and written to be accurate, readable, and genuinely useful. I don't just summarize press releases — I try to add context, real examples, and my own take on why something matters.</p>
+      <p>If I get something wrong, I want to know. Use the <a href="contact.html" style="color:#e63946;">contact page</a> to flag errors or suggest topics. I'm not perfect, but I try to be honest and careful.</p>
+      <p>All opinions in articles are clearly labeled as analysis, and news reporting is separated from commentary. Sources are cited where relevant.</p>
+    </div>
+
+    <div class="section-card">
+      <h2>Beyond PulsePoint</h2>
+      <p>When I'm not writing articles or obsessing over what's trending, I'm probably training for cross-country, coding robots, or helping out with my robotics team. I've been coding for a few years now — Python, some JavaScript, and whatever the robotics competition requires that week.</p>
+      <p>I got into web development because I wanted to actually build something real on the internet, not just post on social media. PulsePoint is that project. It's a work in progress, and it probably always will be — but that's kind of the point.</p>
+    </div>
+  </div>
+  <footer><p>PulsePoint Daily © 2026 — Updated daily by <a href="author.html" style="color:#e63946;text-decoration:none;">Puckwudgie 🐸</a></p></footer>
+</body>
+</html>

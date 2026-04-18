@@ -23,9 +23,10 @@ After the nav bar, the article must open with:
 Byline format (insert after the meta line, before the hero image):
 ```html
 <p style="color:#888;font-size:0.9rem;margin-bottom:0.5rem;">
-  Written by <strong>[Author Name]</strong> · [Role] Editor
+  By <strong>Puckwudgie 🐸</strong> &middot; Updated [Date]
 </p>
 ```
+**Every article must have this exact byline.** Use today's date. The date in the byline must match the date shown in the article's meta line.
 
 ---
 
@@ -53,7 +54,18 @@ After the article text ends, before the footer:
 
 ---
 
-## Author Assignments by Category
+## 4. Internal Links (SEO + Engagement)
+When one article mentions a topic that has its own dedicated article on the site, link to it inline. Examples:
+- Article mentioning AI coding → link to `article-claude-apps.html`
+- Article mentioning robots/AI replacing jobs → link to `article-robot-jobs.html`
+- Article about data centers → link to `article-datacenters.html`
+- Article about GTA VI → link to `article-gta-vi.html`
+- Article about streaming/music → link to `article-chappell-roan.html`
+- Article about Boston/NYC marathon → link to `article-marathon-underdog.html` or `article-nyc-half.html`
+- Article about TikTok trends → link to `article-tiktok.html`
+
+Link style: `<a href="[slug].html" style="color:[category-color];text-decoration:underline;">[anchor text]</a>`
+Aim for 2–3 internal links per article, naturally woven into the text.
 
 | Category | Author | Role |
 |----------|--------|------|
