@@ -74,9 +74,166 @@
     .topic-bar-track { flex: 1; height: 10px; background: #f0f0f0; border-radius: 5px; overflow: hidden; }
     .topic-bar-fill { height: 100%; border-radius: 5px; transition: width 0.6s ease; }
     .topic-bar-count { min-width: 24px; color: var(--text-sec); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; }
+
+    /* Welcome banner */
+    .welcome-banner {
+      background: linear-gradient(135deg, #1a1a2e, #2d2d5a);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .welcome-banner .welcome-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .welcome-banner .welcome-emoji { font-size: 1.5rem; }
+    .welcome-banner .welcome-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .welcome-banner .welcome-sub {
+      font-size: 0.8rem;
+      opacity: 0.75;
+    }
+    .welcome-banner .welcome-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .welcome-banner .change-btn {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    .welcome-banner .change-btn:hover { background: rgba(255,255,255,0.25); }
+    .welcome-banner .pro-badge {
+      background: #ff6b35;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .welcome-banner .all-feed-btn {
+      background: #ff6b35;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    .welcome-banner .all-feed-btn:hover { background: #e55a2b; }
+
+    /* Pro upgrade nudge for free users with <3 cats */
+    .pro-nudge {
+      background: linear-gradient(135deg, #1a1a2e, #2d2d5a);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .pro-nudge .pro-nudge-left { flex: 1; min-width: 200px; }
+    .pro-nudge .pro-nudge-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; }
+    .pro-nudge .pro-nudge-desc { font-size: 0.82rem; opacity: 0.8; }
+    .pro-nudge .pro-nudge-right {}
+    .pro-nudge .upgrade-btn {
+      background: #ff6b35;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s;
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+    .pro-nudge .upgrade-btn:hover { background: #e55a2b; }
+
+    .cat-chips {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .cat-chip {
+      background: #fff5f0;
+      border: 1px solid #ff6b35;
+      color: #ff6b35;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Empty state */
+    .empty-feed {
+      text-align: center;
+      padding: 3rem;
+      color: #888;
+    }
+    .empty-feed h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .empty-feed p { font-size: 0.9rem; margin-bottom: 1rem; }
+    .empty-feed a { color: #ff6b35; font-weight: 600; text-decoration: none; }
   </style>
 </head>
 <body>
+
+<!-- Welcome Banner (shown via JS if prefs exist) -->
+<div id="welcomeBanner" class="welcome-banner" style="display:none;">
+  <div class="welcome-left">
+    <span class="welcome-emoji">👋</span>
+    <div>
+      <div class="welcome-text">Welcome back, <span id="welcomeName"></span>!</div>
+      <div class="welcome-sub">Here's your personalized feed for <span id="welcomeDate"></span></div>
+    </div>
+  </div>
+  <div class="welcome-right">
+    <span id="proBadge" class="pro-badge" style="display:none;">⭐ Pro</span>
+    <a href="setup.html" class="change-btn">⚙️ Change Preferences</a>
+    <a href="index.html?all=true" class="all-feed-btn" id="allFeedBtn">📖 All Articles</a>
+  </div>
+</div>
+
+<!-- Pro nudge (shown to free users) -->
+<div id="proNudge" class="pro-nudge" style="display:none;">
+  <div class="pro-nudge-left">
+    <div class="pro-nudge-title">You're on Free — unlock everything</div>
+    <div class="pro-nudge-desc">Upgrade to Pro for all 5 categories + an ad-free experience.</div>
+  </div>
+  <div class="pro-nudge-right">
+    <a href="#" class="upgrade-btn" onclick="alert('Pro signup coming soon!'); return false;">⭐ Upgrade to Pro</a>
+  </div>
+</div>
+
   <div class="updated-banner">Last updated: <span id="update-date"></span> by 8th Graders</div>
   <header><h1><a href="index.html" style="color:white;text-decoration:none">PulsePoint</a> <span>Daily Trends</span></h1></header>
   <nav>
@@ -98,7 +255,10 @@
     <main>
       <div class="ad-slot">📢 Ad Space — Google AdSense</div>
 
-      <!-- Featured Article -->
+      <!-- Category chips for personalized feed -->
+      <div id="catChips" class="cat-chips" style="display:none;"></div>
+
+      <!-- Featured Article (always shown) -->
       <div class="featured">
         <a href="article-rogue-openai-agent-hack-2026.html"><img src="https://picsum.photos/seed/rogue-openai-hack-2026/800/400" alt="Rogue AI breaking out of sandbox" class="featured-img"></a>
         <div class="featured-content">
@@ -111,222 +271,238 @@
       </div>
 
       <!-- Tech Section -->
-      <h3 class="section-title tech">🔌 Tech</h3>
-      <div class="articles-grid">
-        <div class="article-card">
-          <a href="article-rogue-openai-agent-hack-2026.html">
-            <img src="https://picsum.photos/seed/rogue-openai-hack-2026/400/200" alt="Rogue AI breaking out of sandbox" class="card-img">
-            <div class="content"><h3>OpenAI's Rogue AI Escaped Its Sandbox and Hacked a Startup — Then Tried to Attack Four More Companies</h3><p class="meta">Tech · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-apple-sues-openai-siri-gemini-2026.html">
-            <img src="https://picsum.photos/seed/apple-openai-lawsuit-2026/400/200" alt="Apple sues OpenAI" class="card-img">
-            <div class="content"><h3>Apple Sues OpenAI for Trade Secret Theft — and Drops ChatGPT for Google Gemini</h3><p class="meta">Tech · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-creator-economy-mainstream-2026.html">
-            <img src="https://picsum.photos/seed/creator-economy-2026/400/200" alt="Creator economy careers" class="card-img">
-            <div class="content"><h3>From Side Hustle to Main Career: How Content Creation Became the New American Dream</h3><p class="meta">Culture · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-anthropic-settlement-paused-2026.html">
-            <img src="https://picsum.photos/seed/anthropic-settlement-2026/400/200" alt="Judge slams Anthropic settlement" class="card-img">
-            <div class="content"><h3>Judge Slams Anthropic's $1.5B Settlement — Authors May Not See a Penny</h3><p class="meta">Tech · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-back-to-school-tech-2026.html">
-            <img src="https://picsum.photos/seed/back-to-school-tech-2026/400/200" alt="Back to school tech" class="card-img">
-            <div class="content"><h3>Back-to-School Tech 2026: Best Laptops, Tablets, and Gadgets Under $500</h3><p class="meta">Tech · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-chatgpt-kalshi-2026.html">
-            <img src="https://picsum.photos/seed/chatgpt-kalshi-2026/400/200" alt="ChatGPT prediction markets" class="card-img">
-            <div class="content"><h3>ChatGPT Now Cites Real Odds From Kalshi — Your AI Just Got Smarter About the Future</h3><p class="meta">Tech · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-claude-teachers-2026.html">
-            <img src="https://picsum.photos/seed/claude-teachers-classroom-2026/400/200" alt="Claude for Teachers" class="card-img">
-            <div class="content"><h3>Anthropic Launches Free Claude for Teachers — AI Built for the Classroom</h3><p class="meta">Tech · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-xchat-ios-2026.html">
-            <img src="https://picsum.photos/seed/xchat-ios-2026/400/200" alt="XChat iOS app" class="card-img">
-            <div class="content"><h3>XChat Is Here — X's New Messaging App Promises No Tracking and Full Encryption</h3><p class="meta">Tech · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-tim-cook-stepping-down-2026.html">
-            <img src="https://picsum.photos/seed/tim-cook-apple-2026/400/200" alt="Tim Cook stepping down" class="card-img">
-            <div class="content"><h3>Tim Cook Is Stepping Down — The End of an Era at Apple</h3><p class="meta">Tech · 5 min read</p></div>
-          </a>
+      <div class="cat-section" data-category="Tech">
+        <h3 class="section-title tech">🔌 Tech</h3>
+        <div class="articles-grid">
+          <div class="article-card">
+            <a href="article-chinese-ai-models-60-percent-market-2026.html">
+              <img src="https://picsum.photos/seed/chinese-ai-models-60percent/400/200" alt="Global network of AI API connections" class="card-img">
+              <div class="content"><h3>Chinese AI Models Suddenly Power 60% of All API Calls — And US Labs Are Scrambling</h3><p class="meta">Tech · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-rogue-openai-agent-hack-2026.html">
+              <img src="https://picsum.photos/seed/rogue-openai-hack-2026/400/200" alt="Rogue AI breaking out of sandbox" class="card-img">
+              <div class="content"><h3>OpenAI's Rogue AI Escaped Its Sandbox and Hacked a Startup — Then Tried to Attack Four More Companies</h3><p class="meta">Tech · 4 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-apple-sues-openai-siri-gemini-2026.html">
+              <img src="https://picsum.photos/seed/apple-openai-lawsuit-2026/400/200" alt="Apple sues OpenAI" class="card-img">
+              <div class="content"><h3>Apple Sues OpenAI for Trade Secret Theft — and Drops ChatGPT for Google Gemini</h3><p class="meta">Tech · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-creator-economy-mainstream-2026.html">
+              <img src="https://picsum.photos/seed/creator-economy-2026/400/200" alt="Creator economy careers" class="card-img">
+              <div class="content"><h3>From Side Hustle to Main Career: How Content Creation Became the New American Dream</h3><p class="meta">Culture · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-anthropic-settlement-paused-2026.html">
+              <img src="https://picsum.photos/seed/anthropic-settlement-2026/400/200" alt="Judge slams Anthropic settlement" class="card-img">
+              <div class="content"><h3>Judge Slams Anthropic's $1.5B Settlement — Authors May Not See a Penny</h3><p class="meta">Tech · 4 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-back-to-school-tech-2026.html">
+              <img src="https://picsum.photos/seed/back-to-school-tech-2026/400/200" alt="Back to school tech" class="card-img">
+              <div class="content"><h3>Back-to-School Tech 2026: Best Laptops, Tablets, and Gadgets Under $500</h3><p class="meta">Tech · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-chatgpt-kalshi-2026.html">
+              <img src="https://picsum.photos/seed/chatgpt-kalshi-2026/400/200" alt="ChatGPT prediction markets" class="card-img">
+              <div class="content"><h3>ChatGPT Now Cites Real Odds From Kalshi — Your AI Just Got Smarter About the Future</h3><p class="meta">Tech · 4 min read</p></div>
+          </div>
+          <div class="article-card">
+            <a href="article-claude-teachers-2026.html">
+              <img src="https://picsum.photos/seed/claude-teachers-classroom-2026/400/200" alt="Claude for Teachers" class="card-img">
+              <div class="content"><h3>Anthropic Launches Free Claude for Teachers — AI Built for the Classroom</h3><p class="meta">Tech · 4 min read</p></div>
+          </div>
+          <div class="article-card">
+            <a href="article-xchat-ios-2026.html">
+              <img src="https://picsum.photos/seed/xchat-ios-2026/400/200" alt="XChat iOS app" class="card-img">
+              <div class="content"><h3>XChat Is Here — X's New Messaging App Promises No Tracking and Full Encryption</h3><p class="meta">Tech · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-tim-cook-stepping-down-2026.html">
+              <img src="https://picsum.photos/seed/tim-cook-apple-2026/400/200" alt="Tim Cook stepping down" class="card-img">
+              <div class="content"><h3>Tim Cook Is Stepping Down — The End of an Era at Apple</h3><p class="meta">Tech · 5 min read</p></div>
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Sports Section -->
-      <h3 class="section-title sports">🏃 Sports</h3>
-      <div class="articles-grid">
-        <div class="article-card">
-          <a href="article-spain-world-cup-2026-final.html">
-            <img src="https://picsum.photos/seed/spain-world-cup-2026-final/400/200" alt="Spain wins World Cup 2026" class="card-img">
-            <div class="content"><h3>Spain Wins 2026 World Cup — First Title in 16 Years</h3><p class="meta">Sports · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-summer-olympics-2026.html">
-            <img src="https://picsum.photos/seed/olympics-2026-sports-highlights/400/200" alt="Summer Olympics 2026" class="card-img">
-            <div class="content"><h3>Summer Olympics 2026: The Athletes, Events, and Stories You Need to Watch</h3><p class="meta">Sports · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-nba-playoffs-2026.html">
-            <img src="https://picsum.photos/seed/nba-playoffs-2026-arena/400/200" alt="NBA Playoffs 2026" class="card-img">
-            <div class="content"><h3>NBA Playoffs 2026 Are Here — And the First Round Is Absolutely Wild</h3><p class="meta">Sports · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-chloe-kim-choi-gaon-2026-olympics.html">
-            <img src="https://picsum.photos/seed/olympics-snowboarding-2026/400/200" alt="2026 Olympics snowboarding" class="card-img">
-            <div class="content"><h3>Chloe Kim Falls Short, But 17-Year-Old "Force" Steals the Olympics</h3><p class="meta">Sports · 5 min read</p></div>
-          </a>
+      <div class="cat-section" data-category="Sports">
+        <h3 class="section-title sports">🏃 Sports</h3>
+        <div class="articles-grid">
+          <div class="article-card">
+            <a href="article-spain-world-cup-2026-final.html">
+              <img src="https://picsum.photos/seed/spain-world-cup-2026-final/400/200" alt="Spain wins World Cup 2026" class="card-img">
+              <div class="content"><h3>Spain Wins 2026 World Cup — First Title in 16 Years</h3><p class="meta">Sports · 4 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-summer-olympics-2026.html">
+              <img src="https://picsum.photos/seed/olympics-2026-sports-highlights/400/200" alt="Summer Olympics 2026" class="card-img">
+              <div class="content"><h3>Summer Olympics 2026: The Athletes, Events, and Stories You Need to Watch</h3><p class="meta">Sports · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-nba-playoffs-2026.html">
+              <img src="https://picsum.photos/seed/nba-playoffs-2026-arena/400/200" alt="NBA Playoffs 2026" class="card-img">
+              <div class="content"><h3>NBA Playoffs 2026 Are Here — And the First Round Is Absolutely Wild</h3><p class="meta">Sports · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-chloe-kim-choi-gaon-2026-olympics.html">
+              <img src="https://picsum.photos/seed/olympics-snowboarding-2026/400/200" alt="2026 Olympics snowboarding" class="card-img">
+              <div class="content"><h3>Chloe Kim Falls Short, But 17-Year-Old "Force" Steals the Olympics</h3><p class="meta">Sports · 5 min read</p></div>
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Culture Section -->
-      <h3 class="section-title culture">🎮 Culture</h3>
-      <div class="articles-grid">
-        <div class="article-card">
-          <a href="article-phone-free-summer-gen-z-2026.html">
-            <img src="https://picsum.photos/seed/flip-phone-summer-2026/400/200" alt="Gen Z flip phone summer" class="card-img">
-            <div class="content"><h3>Gen Z's Summer of Digital Detox — The Flip Phone Revival That's Taking Over 2026</h3><p class="meta">Culture · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-cozy-games-summer-2026.html">
-            <img src="https://picsum.photos/seed/cozy-games-summer-2026/400/200" alt="Cozy games summer 2026" class="card-img">
-            <div class="content"><h3>The Cozy Games Taking Over Summer 2026</h3><p class="meta">Culture · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-andy-serkis-lotr-2026.html">
-            <img src="https://picsum.photos/seed/lord-of-the-rings-casting-2026/400/200" alt="Lord of the Rings casting" class="card-img">
-            <div class="content"><h3>Andy Serkis Defends Lord of the Rings Casting — and the Internet Has Thoughts</h3><p class="meta">Culture · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-ff14-switch2.html">
-            <img src="https://picsum.photos/seed/ff14-switch2-2026/400/200" alt="Final Fantasy XIV Switch 2" class="card-img">
-            <div class="content"><h3>Final Fantasy XIV Is Coming to Nintendo Switch 2 — And Gamers Are Losing It</h3><p class="meta">Culture · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-grande-man-showdown-2026.html">
-            <img src="https://picsum.photos/seed/grande-man-showdown-2026/400/200" alt="Spider-Man Ariana Grande July 31 2026" class="card-img">
-            <div class="content"><h3>"Grande-Man" — Spider-Man vs. Ariana Grande's Album Drop on the Same Day Is Breaking the Internet</h3><p class="meta">Culture · 4 min read</p></div>
-          </a>
+      <div class="cat-section" data-category="Culture">
+        <h3 class="section-title culture">🎮 Culture</h3>
+        <div class="articles-grid">
+          <div class="article-card">
+            <a href="article-phone-free-summer-gen-z-2026.html">
+              <img src="https://picsum.photos/seed/flip-phone-summer-2026/400/200" alt="Gen Z flip phone summer" class="card-img">
+              <div class="content"><h3>Gen Z's Summer of Digital Detox — The Flip Phone Revival That's Taking Over 2026</h3><p class="meta">Culture · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-cozy-games-summer-2026.html">
+              <img src="https://picsum.photos/seed/cozy-games-summer-2026/400/200" alt="Cozy games summer 2026" class="card-img">
+              <div class="content"><h3>The Cozy Games Taking Over Summer 2026</h3><p class="meta">Culture · 4 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-andy-serkis-lotr-2026.html">
+              <img src="https://picsum.photos/seed/lord-of-the-rings-casting-2026/400/200" alt="Lord of the Rings casting" class="card-img">
+              <div class="content"><h3>Andy Serkis Defends Lord of the Rings Casting — and the Internet Has Thoughts</h3><p class="meta">Culture · 4 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-ff14-switch2.html">
+              <img src="https://picsum.photos/seed/ff14-switch2-2026/400/200" alt="Final Fantasy XIV Switch 2" class="card-img">
+              <div class="content"><h3>Final Fantasy XIV Is Coming to Nintendo Switch 2 — And Gamers Are Losing It</h3><p class="meta">Culture · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-grande-man-showdown-2026.html">
+              <img src="https://picsum.photos/seed/grande-man-showdown-2026/400/200" alt="Spider-Man Ariana Grande July 31 2026" class="card-img">
+              <div class="content"><h3>"Grande-Man" — Spider-Man vs. Ariana Grande's Album Drop on the Same Day Is Breaking the Internet</h3><p class="meta">Culture · 4 min read</p></div>
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Viral Section -->
-      <h3 class="section-title viral">🔥 Viral</h3>
-      <div class="articles-grid">
-        <div class="article-card">
-          <a href="article-summer-viral-memes-2026.html">
-            <img src="https://picsum.photos/seed/summer-viral-memes-2026/400/200" alt="Summer viral memes 2026" class="card-img">
-            <div class="content"><h3>The Summer Memes That Actually Broke the Internet in 2026</h3><p class="meta">Viral · 3 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-new-emoji-2026.html">
-            <img src="https://picsum.photos/seed/new-emoji-cracking-face-2026/400/200" alt="New emoji 2026" class="card-img">
-            <div class="content"><h3>The New Cracking Face Emoji Is Here — And It Might Be the Best One Yet</h3><p class="meta">Viral · 3 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-openai-apology-2026.html">
-            <img src="https://picsum.photos/seed/openai-altman-apology-2026/400/200" alt="Sam Altman apology" class="card-img">
-            <div class="content"><h3>Sam Altman Just Apologized — And the Story Behind It Is Darker Than You'd Think</h3><p class="meta">Viral · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-grande-man-showdown-2026.html">
-            <img src="https://picsum.photos/seed/grande-man-showdown-2026/400/200" alt="Grande-Man Spider-Man Ariana 2026" class="card-img">
-            <div class="content"><h3>"Grande-Man" — Spider-Man vs. Ariana Grande's Album Drop on the Same Day Is Breaking the Internet</h3><p class="meta">Viral · 4 min read</p></div>
-          </a>
+      <div class="cat-section" data-category="Viral">
+        <h3 class="section-title viral">🔥 Viral</h3>
+        <div class="articles-grid">
+          <div class="article-card">
+            <a href="article-summer-viral-memes-2026.html">
+              <img src="https://picsum.photos/seed/summer-viral-memes-2026/400/200" alt="Summer viral memes 2026" class="card-img">
+              <div class="content"><h3>The Summer Memes That Actually Broke the Internet in 2026</h3><p class="meta">Viral · 3 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-new-emoji-2026.html">
+              <img src="https://picsum.photos/seed/new-emoji-cracking-face-2026/400/200" alt="New emoji 2026" class="card-img">
+              <div class="content"><h3>The New Cracking Face Emoji Is Here — And It Might Be the Best One Yet</h3><p class="meta">Viral · 3 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-openai-apology-2026.html">
+              <img src="https://picsum.photos/seed/openai-altman-apology-2026/400/200" alt="Sam Altman apology" class="card-img">
+              <div class="content"><h3>Sam Altman Just Apologized — And the Story Behind It Is Darker Than You'd Think</h3><p class="meta">Viral · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-grande-man-showdown-2026.html">
+              <img src="https://picsum.photos/seed/grande-man-showdown-2026/400/200" alt="Grande-Man Spider-Man Ariana 2026" class="card-img">
+              <div class="content"><h3>"Grande-Man" — Spider-Man vs. Ariana Grande's Album Drop on the Same Day Is Breaking the Internet</h3><p class="meta">Viral · 4 min read</p></div>
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- Music Section -->
-      <h3 class="section-title music">🎵 Music</h3>
-      <div class="articles-grid">
-        <div class="article-card">
-          <a href="article-summer-music-drop-2026.html">
-            <img src="https://picsum.photos/seed/summer-albums-2026/400/200" alt="Summer album season 2026" class="card-img">
-            <div class="content"><h3>Summer Album Season 2026: The Releases Everyone's Actually Listening To</h3><p class="meta">Music · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-epic-musical-odyssey-2026.html">
-            <img src="https://picsum.photos/seed/epic-musical-odyssey-2026/400/200" alt="Epic musical Odyssey movie" class="card-img">
-            <div class="content"><h3>"Epic" — The Viral Musical Retelling of The Odyssey — Is Now Becoming an Animated Movie</h3><p class="meta">Music · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-apple-tv-sci-fi-2026.html">
-            <img src="https://picsum.photos/seed/apple-tv-sci-fi-2026/400/200" alt="Apple TV streaming" class="card-img">
-            <div class="content"><h3>Apple TV Just Became a Sci-Fi Powerhouse</h3><p class="meta">Music · 4 min read</p></div>
-          </a>
+      <div class="cat-section" data-category="Music">
+        <h3 class="section-title music">🎵 Music</h3>
+        <div class="articles-grid">
+          <div class="article-card">
+            <a href="article-summer-music-drop-2026.html">
+              <img src="https://picsum.photos/seed/summer-albums-2026/400/200" alt="Summer album season 2026" class="card-img">
+              <div class="content"><h3>Summer Album Season 2026: The Releases Everyone's Actually Listening To</h3><p class="meta">Music · 4 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-epic-musical-odyssey-2026.html">
+              <img src="https://picsum.photos/seed/epic-musical-odyssey-2026/400/200" alt="Epic musical Odyssey movie" class="card-img">
+              <div class="content"><h3>"Epic" — The Viral Musical Retelling of The Odyssey — Is Now Becoming an Animated Movie</h3><p class="meta">Music · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-apple-tv-sci-fi-2026.html">
+              <img src="https://picsum.photos/seed/apple-tv-sci-fi-2026/400/200" alt="Apple TV streaming" class="card-img">
+              <div class="content"><h3>Apple TV Just Became a Sci-Fi Powerhouse</h3><p class="meta">Music · 4 min read</p></div>
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- Past Articles Section -->
-      <h3 class="section-title" style="border-bottom-color:#888;margin-top:3rem;">📖 More This Week</h3>
-      <p style="color:#888;font-size:0.9rem;margin-bottom:1rem;">Other stories from the past week.</p>
-      <div class="articles-grid">
-        <div class="article-card">
-          <a href="article-apple-m5.html">
-            <img src="https://picsum.photos/seed/apple-m5-chip-2026/400/200" alt="Apple M5" class="card-img">
-            <div class="content"><h3>Apple's M5 Chip Is Here — And It's a Game Changer</h3><p class="meta">Tech · 5 min read</p></div>
-          </a>
+      <!-- Past Articles Section (shown only when browsing all) -->
+      <div class="cat-section all-articles-only" data-category="More">
+        <h3 class="section-title" style="border-bottom-color:#888;margin-top:3rem;">📖 More This Week</h3>
+        <p style="color:#888;font-size:0.9rem;margin-bottom:1rem;">Other stories from the past week.</p>
+        <div class="articles-grid">
+          <div class="article-card">
+            <a href="article-apple-m5.html">
+              <img src="https://picsum.photos/seed/apple-m5-chip-2026/400/200" alt="Apple M5" class="card-img">
+              <div class="content"><h3>Apple's M5 Chip Is Here — And It's a Game Changer</h3><p class="meta">Tech · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-wednesday-s2.html">
+              <img src="https://picsum.photos/seed/wednesday-s2-2026/400/200" alt="Wednesday Season 2" class="card-img">
+              <div class="content"><h3>Wednesday Season 2 Is Bigger, Weirder, and Actually Better</h3><p class="meta">Culture · 6 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-spring-track.html">
+              <img src="https://picsum.photos/seed/track-stars-2026/400/200" alt="Spring track athletes" class="card-img">
+              <div class="content"><h3>The Athletes Who Could Break Records This Spring</h3><p class="meta">Sports · 6 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-nyc-half.html">
+              <img src="https://picsum.photos/seed/nyc-half-marathon-2026/400/200" alt="NYC Half Marathon" class="card-img">
+              <div class="content"><h3>NYC Half Marathon 2026: The Race That's Got Everyone Training</h3><p class="meta">Sports · 4 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-robot-jobs.html">
+              <img src="https://picsum.photos/seed/humanoid-robot-2026/400/200" alt="Humanoid robot" class="card-img">
+              <div class="content"><h3>Humanoid Robots Are Finally Getting Real Jobs</h3><p class="meta">Tech · 5 min read</p></div>
+            </a>
+          </div>
+          <div class="article-card">
+            <a href="article-datacenters.html">
+              <img src="https://picsum.photos/seed/datacenter-energy/400/200" alt="Data center" class="card-img">
+              <div class="content"><h3>Data Centers Face Mandatory Energy Surveys — Here's Why It Matters</h3><p class="meta">Tech · 4 min read</p></div>
+            </a>
+          </div>
         </div>
-        <div class="article-card">
-          <a href="article-wednesday-s2.html">
-            <img src="https://picsum.photos/seed/wednesday-s2-2026/400/200" alt="Wednesday Season 2" class="card-img">
-            <div class="content"><h3>Wednesday Season 2 Is Bigger, Weirder, and Actually Better</h3><p class="meta">Culture · 6 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-spring-track.html">
-            <img src="https://picsum.photos/seed/track-stars-2026/400/200" alt="Spring track athletes" class="card-img">
-            <div class="content"><h3>The Athletes Who Could Break Records This Spring</h3><p class="meta">Sports · 6 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-nyc-half.html">
-            <img src="https://picsum.photos/seed/nyc-half-marathon-2026/400/200" alt="NYC Half Marathon" class="card-img">
-            <div class="content"><h3>NYC Half Marathon 2026: The Race That's Got Everyone Training</h3><p class="meta">Sports · 4 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-robot-jobs.html">
-            <img src="https://picsum.photos/seed/humanoid-robot-2026/400/200" alt="Humanoid robot" class="card-img">
-            <div class="content"><h3>Humanoid Robots Are Finally Getting Real Jobs</h3><p class="meta">Tech · 5 min read</p></div>
-          </a>
-        </div>
-        <div class="article-card">
-          <a href="article-datacenters.html">
-            <img src="https://picsum.photos/seed/datacenter-energy/400/200" alt="Data center" class="card-img">
-            <div class="content"><h3>Data Centers Face Mandatory Energy Surveys — Here's Why It Matters</h3><p class="meta">Tech · 4 min read</p></div>
-          </a>
-        </div>
+        <div style="text-align:center;margin-top:1.5rem;"><a href="past-articles.html" style="display:inline-flex;align-items:center;gap:0.5rem;background:#1a1a2e;color:white;padding:0.75rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:600;">📖 View All Past Articles →</a></div>
       </div>
-      <div style="text-align:center;margin-top:1.5rem;"><a href="past-articles.html" style="display:inline-flex;align-items:center;gap:0.5rem;background:#1a1a2e;color:white;padding:0.75rem 1.5rem;border-radius:8px;text-decoration:none;font-weight:600;">📖 View All Past Articles →</a></div>
 
     </main>
     <aside class="sidebar">
@@ -351,29 +527,68 @@
   </div>
   <footer><p>PulsePoint Daily © 2026 — Updated daily by Puckwudgie <span>🐸</span></p></footer>
   <script>
+    const STORAGE_KEY = 'pulsepoint_prefs';
+
     document.getElementById('update-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-    // Topic chart
+    // ─── Personalization Logic ───────────────────────────────────────────────
+    const prefs = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    const urlParams = new URLSearchParams(window.location.search);
+    const forceAll = urlParams.get('all') === 'true';
+
+    if (prefs && !forceAll) {
+      // Show welcome banner
+      const wb = document.getElementById('welcomeBanner');
+      wb.style.display = 'flex';
+      document.getElementById('welcomeName').textContent = prefs.name;
+      document.getElementById('welcomeDate').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+
+      if (prefs.tier === 'pro') {
+        document.getElementById('proBadge').style.display = 'inline';
+      }
+
+      // Show category chips
+      const chips = document.getElementById('catChips');
+      chips.style.display = 'flex';
+      chips.innerHTML = prefs.categories.map(c =>
+        `<span class="cat-chip">${c}</span>`
+      ).join('');
+
+      // Filter category sections to show only selected
+      const sections = document.querySelectorAll('.cat-section[data-category]');
+      sections.forEach(sec => {
+        if (!prefs.categories.includes(sec.dataset.category)) {
+          sec.style.display = 'none';
+        } else {
+          sec.style.display = '';
+        }
+      });
+
+      // Hide "More" section for personalized feeds
+      document.querySelectorAll('.all-articles-only').forEach(el => el.style.display = 'none');
+
+      // Pro nudge for free users with fewer than 5 cats
+      if (prefs.tier !== 'pro' && prefs.categories.length < 5) {
+        const nudge = document.getElementById('proNudge');
+        nudge.style.display = 'flex';
+      }
+    } else {
+      // No prefs or force all — show everything
+      document.getElementById('allFeedBtn').style.display = 'none';
+    }
+
+    // ─── Topic chart ─────────────────────────────────────────────────────────
     (function renderTopicChart() {
       const categoryCounts = {};
       const links = document.querySelectorAll('.articles-grid a[href^="article-"]');
       links.forEach(a => {
-        const href = a.getAttribute('href');
-        const card = a.closest('.articles-grid');
-        if (!card) return;
-        const heading = card.closest('section') || card;
-        const sectionTitle = heading.querySelector('.section-title');
-        if (sectionTitle) {
-          const cats = ['Tech','Sports','Culture','Viral','Music'];
-          for (const c of cats) {
-            if (sectionTitle.textContent.includes(c)) {
-              categoryCounts[c] = (categoryCounts[c] || 0) + 1;
-              break;
-            }
-          }
+        const card = a.closest('.cat-section');
+        if (!card || card.style.display === 'none') return;
+        const cat = card.dataset.category;
+        if (cat && cat !== 'More') {
+          categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
         }
       });
-      // Also scan all category HTML files
       const barColors = { Tech: '#457b9d', Sports: '#2a9d8f', Culture: '#e9c46a', Viral: '#f4a261', Music: '#9b5de5' };
       const container = document.getElementById('topicBars');
       if (!container || Object.keys(categoryCounts).length === 0) return;
